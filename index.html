@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Page -->
+    <div id="mainPage" class="container active">
+        <div class="box">
+            <h1 class="animated">🎉<i>Happy Birthday!</i> 🎂🎁</h1>
+            <p class="emoji">🎈🎈✨✨🎈🎈</p>
+           <i><p>Enter your name to celebrate:</p></i>
+            <input type="text" id="nameInput" placeholder="Enter your name">
+           <i><p>Enter your date of birth:</p></i>
+            <input type="text" id="dateInput" placeholder="Enter the date">
+            <button onclick="showBlessingCard()">🎁 View Your Blessing Card</button>
+            <p id="error" class="error"></p>
+        </div>
+        <!-- Floating balloons -->
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+    </div>
+
+    <!-- Blessing Card Page -->
+    <div id="blessingCardPage" class="container">
+        <div class="box fade-in">
+            <h1>🎉 Happy Birthday, <span id="displayName">[Name]</span>! 🎂</h1>
+            <p class="emoji">🎈✨💖🎁</p>
+            <p><strong>Date: <span id="displayDate">[Date]</span></strong></p>
+            <div class="blessing">
+                Wishing you all the joy, love, and success that life has to offer. 🎉 <br>
+                On this special day, may your heart be filled with happiness, <br>
+                and may your dreams soar high like balloons in the sky. <br>
+                You are truly special, and today is all about celebrating you! 💖
+            </div>
+            <!-- Birthday Cake Video -->
+            <video class="video" autoplay muted loop>
+                <source src="birthday Videos.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- Autoplay Happy Birthday Audio -->
+            <audio id="birthdayAudio" autoplay>
+                <source src="happy-birthday-lofi-version-222774.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            <button onclick="showMainPage()">⬅️ Back to Main Page</button>
+        </div>
+    </div>
+
+    <script>
+        function showBlessingCard() {
+            // Get the entered name and date
+            const enteredName = document.getElementById("nameInput").value;
+            const enteredDate = document.getElementById("dateInput").value;
+
+            // Check if the name and date are entered
+            if (enteredName.trim() === "" || enteredDate.trim() === "") {
+                document.getElementById("error").textContent = "Please enter your name and date.";
+                return;
+            }
+
+            // Set name and date on blessing card
+            document.getElementById("displayName").textContent = enteredName;
+            document.getElementById("displayDate").textContent = enteredDate;
+
+            // Autoplay the audio when blessing card is shown
+            const audio = document.getElementById("birthdayAudio");
+            audio.play();
+
+            // Show the blessing card page
+            document.getElementById("mainPage").classList.remove("active");
+            document.getElementById("blessingCardPage").classList.add("active");
+        }
+
+        function showMainPage() {
+            // Stop the audio
+            const audio = document.getElementById("birthdayAudio");
+            audio.pause();
+            audio.currentTime = 0;
+
+            // Show the main page
+            document.getElementById("blessingCardPage").classList.remove("active");
+            document.getElementById("mainPage").classList.add("active");
+        }
+    </script>
+</body>
+</html>
